@@ -1,0 +1,7 @@
+import { BarChart3, CalendarCog, Images, LayoutDashboard, Link2, MessageSquareText, ScanLine, Users } from "lucide-react";
+import Link from "next/link";
+import { AdminGuard } from "@/features/admin/admin-guard";
+
+const adminNavigation = [{ href: "/admin", label: "Overview", icon: LayoutDashboard }, { href: "/admin/rsvps", label: "RSVPs", icon: Users }, { href: "/admin/invitations", label: "Invitations", icon: Link2 }, { href: "/admin/content", label: "Content", icon: CalendarCog }, { href: "/admin/moderation", label: "Moderation", icon: Images }, { href: "/admin/check-in", label: "Check-in", icon: ScanLine }, { href: "/admin/knowledge", label: "AI knowledge", icon: MessageSquareText }, { href: "/admin/analytics", label: "Analytics", icon: BarChart3 }];
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) { return <AdminGuard><div className="mx-auto grid max-w-7xl gap-6 px-5 pb-16 pt-4 lg:grid-cols-[14rem_1fr]"><aside className="h-fit rounded-2xl border border-royal/10 bg-white/60 p-3 lg:sticky lg:top-20"><p className="px-3 py-2 text-xs font-semibold uppercase tracking-widest text-bronze">Organizer</p><nav aria-label="Admin navigation" className="grid grid-cols-2 gap-1 sm:grid-cols-4 lg:grid-cols-1">{adminNavigation.map(({ href, label, icon: Icon }) => <Link className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs text-lilac hover:bg-royal/10 hover:text-ink sm:text-sm" key={href} href={href}><Icon size={16} />{label}</Link>)}</nav></aside><div>{children}</div></div></AdminGuard>; }

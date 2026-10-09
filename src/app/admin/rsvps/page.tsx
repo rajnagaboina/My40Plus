@@ -1,0 +1,2 @@
+import { RsvpDashboard } from "@/features/admin/rsvp-dashboard";
+export default function AdminRsvpsPage() { return <main><header className="mb-7"><p className="text-xs uppercase tracking-[.3em] text-bronze">Guest management</p><h1 className="mt-2 font-display text-4xl">RSVP dashboard</h1><p className="mt-2 text-sm text-lilac">Local responses from this browser.</p></header><RsvpDashboard /></main>; }

@@ -1,0 +1,3 @@
+import { clearAdminSession, createLocalAdminSession, readAdminSession } from "./auth";
+it("creates and clears a local admin preview session", () => { const values = new Map<string, string>(); const storage = { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => values.set(key, value), removeItem: (key: string) => values.delete(key) }; createLocalAdminSession(storage); expect(readAdminSession(storage)?.role).toBe("admin"); clearAdminSession(storage); expect(readAdminSession(storage)).toBeNull(); });
+it("rejects malformed or non-admin session data", () => { expect(readAdminSession({ getItem: () => "broken" })).toBeNull(); expect(readAdminSession({ getItem: () => JSON.stringify({ role: "guest" }) })).toBeNull(); });

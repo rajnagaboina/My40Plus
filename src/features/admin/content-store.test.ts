@@ -1,0 +1,2 @@
+import { readContentDrafts, saveContentDraft } from "./content-store";
+it("saves independent organizer content drafts", () => { const values = new Map<string, string>(); const storage = { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => values.set(key, value) }; saveContentDraft("invitation", "Welcome", storage); saveContentDraft("family", "Family notes", storage); expect(readContentDrafts(storage)).toEqual({ invitation: "Welcome", family: "Family notes" }); });

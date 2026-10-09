@@ -1,0 +1,7 @@
+"use client";
+import { Bot, CalendarPlus, Eye, Heart, ImagePlus, ScanLine, TicketCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { GlassCard } from "@/components/ui/glass-card";
+import { analyticsSummary, readAnalytics, type AnalyticsEventName } from "@/features/analytics/storage";
+const cards: Array<{ event: AnalyticsEventName; label: string; icon: typeof Eye }> = [{ event: "page_view", label: "Page views", icon: Eye }, { event: "rsvp_submit", label: "RSVPs", icon: TicketCheck }, { event: "calendar_add", label: "Calendar adds", icon: CalendarPlus }, { event: "ai_question", label: "AI questions", icon: Bot }, { event: "media_upload", label: "Media uploads", icon: ImagePlus }, { event: "wish_post", label: "Wishes", icon: Heart }, { event: "guest_check_in", label: "Check-ins", icon: ScanLine }];
+export function AnalyticsDashboard() { const [summary, setSummary] = useState(() => analyticsSummary([])); useEffect(() => setSummary(analyticsSummary(readAnalytics())), []); return <><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">{cards.map(({ event, label, icon: Icon }) => <GlassCard className="p-5" key={event}><Icon className="text-bronze" /><p className="mt-3 text-xs uppercase tracking-widest text-lilac">{label}</p><p className="font-display text-3xl">{summary[event]}</p></GlassCard>)}</div><p className="mt-5 text-xs text-ink/50">Counts represent activity in this browser since local tracking was enabled. No personal analytics are transmitted.</p></>; }

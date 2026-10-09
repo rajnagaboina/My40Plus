@@ -1,0 +1,2 @@
+import { analyticsSummary, trackEvent } from "./storage";
+it("tracks and summarizes engagement events", () => { const values = new Map<string, string>(); const storage = { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => values.set(key, value) }; let events = trackEvent("page_view", "/", storage); events = trackEvent("ai_question", "/assistant", storage); events = trackEvent("ai_question", "/assistant", storage); expect(analyticsSummary(events)).toMatchObject({ page_view: 1, ai_question: 2, rsvp_submit: 0 }); });
